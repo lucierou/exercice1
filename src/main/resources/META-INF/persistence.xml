@@ -8,7 +8,7 @@
     <persistence-unit name="exercice1">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>org.example.model.Produit</class>
+        <class>org.example.entities.Produit</class>
 
         <properties>
             <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>

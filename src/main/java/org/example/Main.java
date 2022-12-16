@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.model.Produit;
+import org.example.entities.Produit;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -69,11 +69,40 @@ public class Main {
         System.out.println("Produit avec id = 1 (avant modif) : " + p1);
         p1.setMarque("marque modifiée");
         p1.setReference("référence modifiée");
+        p1.setPrix(500.0);
+        p1.setDateAchat(new Date("2020/10/10"));
         em.flush();
         transaction.commit();
 
         Produit p4 = em.find(Produit.class, 1);
         System.out.println("Après modification : " + p4);
 
+
+
+        System.out.println("2.1 : Tous les produits : ");
+        List<Produit> results = em.createNativeQuery("SELECT * FROM produit", Produit.class).getResultList();
+        for (Produit p : results) {
+            System.out.println(p);
+        }
+
+
+
+        System.out.println("2.2 : Produits dont le prix est supérieur à 100 : ");
+        Query query22 = em.createQuery("SELECT p FROM Produit p WHERE p.prix > 100");
+        List<Produit> results22 = query22.getResultList();
+        for (Produit p : results22) {
+            System.out.println(p);
+        }
+
+        System.out.println("2.3 : Produits achetés entre le 2022-12-10 et le 2022-12-18: ");
+        Query query23 = em.createQuery("SELECT p FROM Produit p WHERE p.dateAchat > '2022-12-10' AND p.dateAchat < '2022-12-18'");
+        List<Produit> results23 = query23.getResultList();
+        for (Produit p : results23) {
+            System.out.println(p);
+        }
+
+
+        em.close();
+        emf.close();
     }
 }
