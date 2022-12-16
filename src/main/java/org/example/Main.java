@@ -86,9 +86,9 @@ public class Main {
         }
 
 
-
         System.out.println("2.2 : Produits dont le prix est supérieur à 100 : ");
-        Query query22 = em.createQuery("SELECT p FROM Produit p WHERE p.prix > 100");
+        Query query22 = em.createQuery("SELECT p FROM Produit p WHERE p.prix > :param");
+        query22.setParameter("param", 100.0);
         List<Produit> results22 = query22.getResultList();
         for (Produit p : results22) {
             System.out.println(p);
