@@ -40,6 +40,7 @@ public class Main {
         }
 
 
+
         System.out.println("2 : Affichage produit avec id = 2 : ");
         Produit p2 = em.find(Produit.class, 2);
         System.out.println(p2);
