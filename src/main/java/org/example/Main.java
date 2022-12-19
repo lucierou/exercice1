@@ -95,7 +95,9 @@ public class Main {
         }
 
         System.out.println("2.3 : Produits achetés entre le 2022-12-10 et le 2022-12-18: ");
-        Query query23 = em.createQuery("SELECT p FROM Produit p WHERE p.dateAchat > '2022-12-10' AND p.dateAchat < '2022-12-18'");
+        Query query23 = em.createQuery("SELECT p FROM Produit p WHERE p.dateAchat BETWEEN :dateDebut AND :dateFin");
+        query23.setParameter("dateDebut", new Date("2022/12/10"));
+        query23.setParameter("dateFin", new Date("2022/12/18"));
         List<Produit> results23 = query23.getResultList();
         for (Produit p : results23) {
             System.out.println(p);
